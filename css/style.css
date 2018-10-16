@@ -2,11 +2,6 @@ body {
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
-	background-color: #dfdfdf;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 	font-family: 'Signika', sans-serif;
 }
 
@@ -22,6 +17,7 @@ html {
 	align-items: center;
 	flex-direction: column;
 }
+
 #headerdiv {
 	height: 25%;
 	display: flex;
@@ -49,9 +45,11 @@ html {
 
 #bottomlevel {
 	border-radius: 3px;
-	height: 75%;
+	height: 62%;
 	width: 70%;
 	display: flex;
+	margin: 3% 0 0 0 ;
+	padding: 20px 0 0 0 ;
 	background-color: white;
 	flex-direction: column;
 }
@@ -62,19 +60,20 @@ html {
 	height: 100%;
 	background-color: black;
 	opacity: 0.2;
-	z-index: -1;
+	z-index: 0;
 }
 
 #hero{
 	width: 100%;
 	height: 100%;
-	background-image: url(../resources/bg.jpg);
+	background-image: url(../resources/bg2.jpg);
 	background-position: center; 
+	background-repeat: no-repeat;
+	background-blend-mode: lighten;
+    background-size: 100% auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: -2;
-	
 }
 
 #qsplit {
@@ -107,7 +106,6 @@ html {
 	text-align: center;
 }
 
-
 .answerbutton {
 	border: 3px solid black;
 	height: 40px;
@@ -117,8 +115,8 @@ html {
 	border-radius: 8px;
 }
 
-.answerbutton :hover {
-	background-color: #dedede;
+.answerbutton:hover{
+	background-color: #fbfbfb;
 }
 
 .answertext{
@@ -126,11 +124,32 @@ html {
 	font-size: 1.2em;
 }
 
-@media only screen and (max-width: 600px) {
-	#header {
-		font-size: 1em;
+.above{
+	z-index: 1;
+}
+
+@media only screen and (max-width: 800px) {
+	#headertext {
+		font-size: 2em;
 		padding: 15px;
 	}
+		#questiontext {
+		margin: 4%;
+		font-size: 1.3em;
+	}
+
+}
+
+@media only screen and (max-width: 600px) {
+
+	#bottomlevel {
+		width: 90%;
+	}
+
+	#hero{
+		background-size: auto 100%;
+	}
+
 }
 
 
