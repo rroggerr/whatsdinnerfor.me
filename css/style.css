@@ -16,35 +16,28 @@ html {
 }
 
 #nav {
-	background-color: black;
-	opacity: .75;
-	height: 70%;
-	width: 80%;
+	height: 100%;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 }
-
-#header {
-	opacity: 1;
-	font-size: 2em;
-	color: white;
-	text-align: center;
-	margin: 3% 3% 3% 3%;
+#headerdiv {
+	height: 25%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
 
-#expln {
-	width: 85%;
+.whitetext{
 	color: white;
-	font-size: 1em;
-	/*padding: 0 50px 0 50px;*/
 }
 
-
-#lineacross {
-	background-color: white;
-	height: 3px;
-	width: 90%
+#headertext {
+	font-weight: 900;
+	font-size: 3em;
+	margin: auto auto 5px auto;
 }
 
 #toplevel {
@@ -55,11 +48,21 @@ html {
 }
 
 #bottomlevel {
-	height: 50%;
-	width: 100%;
+	border-radius: 3px;
+	height: 75%;
+	width: 70%;
 	display: flex;
 	background-color: white;
 	flex-direction: column;
+}
+
+.layer {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 0.2;
+	z-index: -1;
 }
 
 #hero{
@@ -70,7 +73,8 @@ html {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: -1;
+	z-index: -2;
+	
 }
 
 #qsplit {
@@ -103,10 +107,24 @@ html {
 	text-align: center;
 }
 
+
 .answerbutton {
-	
+	border: 3px solid black;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	border-radius: 8px;
 }
 
+.answerbutton :hover {
+	background-color: #dedede;
+}
+
+.answertext{
+	margin: auto;
+	font-size: 1.2em;
+}
 
 @media only screen and (max-width: 600px) {
 	#header {
