@@ -137,11 +137,9 @@ html {
 		margin: 4%;
 		font-size: 1.3em;
 	}
-
 }
 
 @media only screen and (max-width: 600px) {
-
 	#bottomlevel {
 		width: 90%;
 	}
@@ -149,7 +147,6 @@ html {
 	#hero{
 		background-size: auto 100%;
 	}
-
 }
 
 
