@@ -105,7 +105,7 @@ html {
 	justify-content: center;
 }
 
-#questiontext {
+#questiontext, #recommendtext{
 	margin: 3%;
 	font-size: 2em;
 	text-align: center;

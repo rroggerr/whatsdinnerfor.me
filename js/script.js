@@ -4,6 +4,7 @@ var res ={};
 // var fileloc="../resources/restaurants.csv"
 var fileloc="https://raw.githubusercontent.com/rroggerr/whatsdinnerfor.me/master/resources/restaurants.csv";
 var qtext = 0; 
+var rtext=0;
 var sbutton = 0;
 var lbutton = 0;
 var rbutton = 0;
@@ -20,6 +21,7 @@ function init(){
 });
 	// Initialize the text
 	qtext = document.getElementById("questiontext"); 
+	rtext = document.getElementById("recommendtext"); 
 	sbutton = document.getElementById("answers");
 	lbutton = document.getElementById("answer1");
 	rbutton = document.getElementById("answer2");
@@ -47,7 +49,8 @@ function genstring(resp){
 	// Case 1 Random Restaurant:
 	var randres = Math.floor(Math.random()*res["data"].length);
 	var resname = res["data"][randres][1];
-	qtext.innerText = "DO YOU WANT TO GO TO "+resname.toUpperCase()+"?"
+	qtext.innerText = "DO YOU WANT TO GO TO ";
+	rtext.innerText=resname.toUpperCase();
 }
 
 
