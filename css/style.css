@@ -85,6 +85,10 @@ html {
 	align-items: center;
 }
 
+#question{
+	height: 30%;
+}
+
 #qsplit {
 	/*background-color: green;*/
 	width: 100%;
@@ -161,6 +165,10 @@ html {
 
 	#hero{
 		background-size: auto 100%;
+	}
+
+	#answers {
+		flex-direction: column;
 	}
 }
 

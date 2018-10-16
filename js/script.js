@@ -38,7 +38,7 @@ function start(){
 	// Initialize 2 buttons below only if initbutton is false
 	if (!initbutton){
 		document.getElementById("sbox").classList.add("hidden")
-		document.getElementById("lbox").classList.remove("hidden")
+		// document.getElementById("lbox").classList.remove("hidden")
 		document.getElementById("rbox").classList.remove("hidden")
 		initbutton = true;
 	}
