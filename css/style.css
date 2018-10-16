@@ -18,6 +18,15 @@ html {
 	flex-direction: column;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
+}
+
 #headerdiv {
 	height: 25%;
 	display: flex;
@@ -92,6 +101,8 @@ html {
 #answers {
 	display: flex;
 	flex-direction: row;
+	align-items:center;
+	justify-content: center;
 }
 
 #questiontext {
@@ -126,6 +137,10 @@ html {
 
 .above{
 	z-index: 1;
+}
+
+.hidden {
+	display: none;
 }
 
 @media only screen and (max-width: 800px) {

@@ -5,7 +5,7 @@
 		<meta name="viewport" content='width=device-width initial-scale=1.0' user-scalable = "no">
 		<link rel="stylesheet" href="css/style.css">
 		<link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
-        <!-- // <script src="js/jquery-3.3.1.min.js"></script> -->
+        <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/papaparse.min.js"></script>
 		<script src="js/script.js"></script>
         <title>What's Dinner For Me?</title>
@@ -19,25 +19,30 @@
 			<div id="nav">
                 <div class="layer"></div>
                 <div id="headerdiv">
-				    <p class="whitetext above" id="headertext">WHAT'S DINNER FOR ME?</p>
-                    <p class= "whitetext above" id="headersubtext"> For those who can't decide on where to eat! </p>
+				    <p class="whitetext noselect above" id="headertext">WHAT'S DINNER FOR ME?</p>
+                    <p class= "whitetext noselect above" id="headersubtext"> For those who can't decide on where to eat! </p>
                 </div>
 			<div class="above" id="bottomlevel">
 				<div id="question">
-					<p id="questiontext"> THIS IS WHERE I WOULD ASK THE USER A VERY LONG QUESTION ABOUT THEIR PREFERENCE </p>
+					<p id="questiontext" class="noselect"> THIS IS WHERE I WOULD ASK THE USER A VERY LONG QUESTION ABOUT THEIR PREFERENCE </p>
 				</div>
 				<div id="qsplit">
 					<div id="qsplitline"></div>
 				</div>
 				<div id="answers">
-					<div class="answerbox">
-						<div class="button answerbutton" onclick="alert('Yes')">
-                            <p class="answertext" id="answer1">Yup</p>
+                    <div class="answerbox" id="sbox">
+                        <div class="button answerbutton" onclick="start()">
+                            <p class="answertext noselect" id="answers">Let's Go</p>
+                        </div>
+                    </div>
+					<div class="answerbox hidden" id="lbox">
+						<div class="button answerbutton" onclick="genstring(0)">
+                            <p class="answertext noselect" id="answer1">Yup</p>
                         </div>
 					</div>
-					<div class="answerbox">
-						<div class="button answerbutton" onclick="alert('No')">
-                            <p class="answertext" id="answer2">Nope</p>
+					<div class="answerbox hidden" id="rbox">
+						<div class="button answerbutton" onclick="genstring(0)">
+                            <p class="answertext noselect" id="answer2">Nope</p>
                         </div>
 					</div>
 				</div>
