@@ -43,6 +43,7 @@ function start(){
 		initbutton = true;
 	}
 	genstring(0)
+	ga('send', 'event', {'eventCategory': 'Click','eventAction': 'letsgo'});
 }
 
 function genstring(resp){
