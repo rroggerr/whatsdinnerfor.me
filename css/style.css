@@ -149,6 +149,10 @@ html {
 	display: none;
 }
 
+a {
+	outline:none;
+}
+
 @media only screen and (max-width: 800px) {
 	#headertext {
 		font-size: 1.5em;
