@@ -176,6 +176,10 @@ a {
 	#answers {
 		flex-direction: column;
 	}
+
+	#headersubtext {
+		margin: 0 10% 0 10%;
+	}
 }
 
 
