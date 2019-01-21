@@ -79,7 +79,7 @@ html {
 	background-position: center; 
 	background-repeat: no-repeat;
 	background-blend-mode: lighten;
-    background-size: 100% auto;
+    background-size: cover;
 	display: flex;
 	justify-content: center;
 	align-items: center;
