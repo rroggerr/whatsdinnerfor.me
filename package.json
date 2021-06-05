@@ -5,13 +5,14 @@
   "scripts": {
     "start": "node --require esm build/server/index.js",
     "build": "tsc && webpack --config webpack.config.js --mode production",
-    "dev": "concurrently 'webpack --watch --mode development' 'ts-node-dev src/server/index.ts'"
+    "dev": "concurrently 'webpack --watch --mode development' 'ts-node-dev --files src/server/index.ts'"
   },
   "dependencies": {
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "yelp-fusion": "^3.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.13.0",
