@@ -1,30 +1,31 @@
 import express from 'express';
 
-import {YelpApi} from './yelpApi'
+import {YelpApi} from './yelpApi';
 
 if (!process.env.HEROKU) {
-    require('dotenv').config()
+  require('dotenv').config();
 }
 
 const PORT = process.env.PORT || 8080;
-const yelpApiKey = process.env.YELP_API_KEY || ''
+const yelpApiKey = process.env.YELP_API_KEY || '';
 
 const app = express();
-const YelpClient = new YelpApi(yelpApiKey)
+const YelpClient = new YelpApi(yelpApiKey);
 
 app.use('/build', express.static('build'));
 app.use(express.static('public'));
 
 app.get('/api/restaurants', async (req, res, next) => {
-    const location = req.query.location
-    try {
-        const yelpResp = await YelpClient.getYelpPlaces(location as string);
-        res.json(yelpResp);
-    } catch (err) {
-        next(err);
-    }
-})
+  const {location, walking} = req.query;
+  try {
+    const yelpResp = await YelpClient
+      .getYelpPlaces(location as string, !!walking);
+    res.json(yelpResp);
+  } catch (err) {
+    next(err);
+  }
+});
 
 app.listen(PORT, function () {
-    console.log(`App is listening on port ${PORT}!`);
+  console.log(`App is listening on port ${PORT}!`);
 });
