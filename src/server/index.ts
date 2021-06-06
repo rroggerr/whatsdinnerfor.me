@@ -1,7 +1,7 @@
 import express from 'express';
 import {YelpApi} from './yelpApi'
 
-require('dotenv').config()
+// require('dotenv').config()
 
 const PORT = process.env.PORT || 8080;
 // const yelpApiKey = process.env.YELP_API_KEY || ''
