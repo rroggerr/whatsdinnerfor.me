@@ -7,6 +7,10 @@
     "build": "tsc && webpack --config webpack.config.js --mode production",
     "dev": "concurrently 'webpack --watch --mode development' 'ts-node-dev --files src/server/index.ts'"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rroggerr/whatsdinnerfor.me.git"
+  },
   "dependencies": {
     "esm": "^3.2.25",
     "express": "^4.17.1",
