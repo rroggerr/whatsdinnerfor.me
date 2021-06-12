@@ -1,6 +1,7 @@
 import express from 'express';
 
 import {YelpApi} from './yelpApi';
+import {getLatLong} from './locationApi';
 
 if (!process.env.HEROKU) {
   require('dotenv').config();
@@ -21,6 +22,17 @@ app.get('/api/restaurants', async (req, res, next) => {
     const yelpResp = await YelpClient
       .getYelpPlaces(location as string, !!walking);
     res.json(yelpResp);
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get('/api/location', async (req, res, next) => {
+  const ip = req.socket.remoteAddress;
+  
+  try {
+    const location = await getLatLong(ip);
+    res.json(location);
   } catch (err) {
     next(err);
   }
