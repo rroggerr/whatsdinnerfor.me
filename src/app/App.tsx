@@ -1,20 +1,31 @@
 import React from 'react';
-import {useAsync, useGeolocation} from 'react-use';
+import { Restaurant } from './api';
+import {useApiContext} from './ApiContext';
 
-import {getLatLong} from './api';
+export const App: React.FC = () => {
+  const {restaurants, isLoading} = useApiContext();
+  const [curr, setCurr] = React.useState<Restaurant>();
+  const [rejects, setRejects] = React.useState<string[]>([]);
 
-const App: React.FC = () => {
-  const location = useGeolocation();
-  const dat = useAsync(getLatLong);
+  const available = restaurants.filter(({id}) => !rejects.some((rejectId) => id === rejectId));
 
-  console.log(dat);
-  console.log(location);
+  React.useEffect(() => {
+    setCurr(available[Math.floor(Math.random() * available.length)]);
+  }, [restaurants]);
+
+  const handleReject = () => {
+    curr && setRejects((rejects) => [curr.id, ...rejects]);
+    const rand = available[Math.floor(Math.random() * available.length)];
+    setCurr(rand);
+  };
+
+  const suggestion = <><span>How about {curr?.name}</span>
+    <button onClick={handleReject}>No</button></>;
+
   return (
     <div className="App">
-      {location.toString()}
-      Yes
+      {isLoading && 'Loading'}
+      {!isLoading && suggestion}
     </div>
   );
 };
-
-export default App;
