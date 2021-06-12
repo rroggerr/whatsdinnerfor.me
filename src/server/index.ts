@@ -28,7 +28,9 @@ app.get('/api/restaurants', async (req, res, next) => {
 });
 
 app.get('/api/location', async (req, res, next) => {
-  const ip = req.socket.remoteAddress;
+  const fwdHeader = req.header('x-forwarded-for'); 
+  const forwardedIp = fwdHeader?.split(',')?.[0];
+  const ip = forwardedIp || req.socket.remoteAddress;
   
   try {
     const location = await getLatLong(ip);
