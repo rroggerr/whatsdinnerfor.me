@@ -12,11 +12,19 @@ interface IpApiResp {
 }
 
 export const getLatLong = async (): Promise<IpApiResp> => {
-  const res = await myFetch<IpApiResp>(
-    'http://ip-api.com/json',
-    {},
-  );
-  return res;
+  try {
+    const res = await myFetch<IpApiResp>(
+      'http://ip-api.com/json',
+      {},
+    );
+    return res;
+  } catch {
+    const res = await myFetch<IpApiResp>(
+      '/api/location',
+      {},
+    );
+    return res;
+  }
 };
 
 interface GetRestaurantsRequest {
