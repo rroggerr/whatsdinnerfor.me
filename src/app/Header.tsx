@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { css } from '@emotion/css';
+
+import { useApiContext } from './ApiContext';
 
 const styles = {
   root: css`
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     padding: 0 64px;
     background-color: black;
@@ -15,11 +18,43 @@ const styles = {
     font-weight: 600;
     font-family: Tahoma, sans-serif;
   `,
+  input: css`
+    border: none;
+    outline: none;
+    height: 36px;
+    width: 320px;
+    border-radius: 9999px;
+    padding: 0 40px;
+    background-image: url(location.svg);
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-position-y: center;
+    background-origin: padding-box;
+    background-position-x: 8px;
+    font-size: 22px;
+  `,
 };
 
-export const Header: React.FC = () => (
-  <div className={styles.root}>
-    <span className={styles.titleText}>Whats For Dinner</span>
-    <input type="text" name="location" autoComplete="off" />
-  </div>
-);
+export const Header: React.FC = () => {
+  const { displayLocation } = useApiContext();
+  const [locationStr, setLocationStr] = React.useState<string>('');
+
+  useEffect(() => {
+    setLocationStr(displayLocation ?? '');
+  }, [displayLocation]);
+
+  return (
+    <div className={styles.root}>
+      <span className={styles.titleText}>Whats For Dinner</span>
+      <input
+        type="text"
+        name="location"
+        autoComplete="off"
+        className={styles.input}
+        maxLength={50}
+        value={locationStr}
+        onChange={({ target }) => setLocationStr(target.value)}
+      />
+    </div>
+  );
+};

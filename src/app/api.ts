@@ -12,6 +12,7 @@ export const myFetch = async <T>(
 interface IpApiResp {
   lat: string;
   lon: string;
+  city: string;
 }
 
 export const getLatLong = async (): Promise<IpApiResp> => {

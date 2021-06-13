@@ -6,6 +6,7 @@ import { useLocation } from './useLocation';
 interface ApiContextState {
   isLoading: boolean;
   location?: string | null;
+  displayLocation?: string | null;
   restaurants: Restaurant[];
 }
 
@@ -23,6 +24,7 @@ export const ApiContextProvider: React.FC = ({ children }) => {
   const state: ApiContextState = {
     isLoading: location.loading || restaurants.loading,
     location: location.locationStr,
+    displayLocation: location.displayLocation,
     restaurants: restaurants.value ?? [],
   };
 

@@ -4,6 +4,7 @@ import { getLatLong } from './api';
 export interface LocationData {
   loading: boolean;
   locationStr: null | string;
+  displayLocation: null | string;
   lat?: string | number;
   lon?: string | number;
 }
@@ -16,6 +17,9 @@ export const useLocation = (): LocationData => {
   const lat = sensorLocation.latitude || clientIpLocation.value?.lat;
   const lon = sensorLocation.longitude || clientIpLocation.value?.lon;
   const locationStr = lat && lon ? `${lat}, ${lon}` : null;
+  const displayLocation = sensorLocation?.latitude
+    ? 'Current Location'
+    : clientIpLocation.value?.city ?? null;
 
-  return { lat, lon, loading, locationStr };
+  return { lat, lon, loading, locationStr, displayLocation };
 };
