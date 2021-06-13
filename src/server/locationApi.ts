@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-export const getLatLong = async (ip: string | undefined)=> {
+export const getLatLong = async (ip: string | undefined) => {
   if (!ip) {
     throw new Error('No IP address provided');
   }

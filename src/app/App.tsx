@@ -1,13 +1,16 @@
 import React from 'react';
 import { Restaurant } from './api';
-import {useApiContext} from './ApiContext';
+import { useApiContext } from './ApiContext';
+import { Header } from './Header';
 
 export const App: React.FC = () => {
-  const {restaurants, isLoading} = useApiContext();
+  const { restaurants, isLoading } = useApiContext();
   const [curr, setCurr] = React.useState<Restaurant>();
   const [rejects, setRejects] = React.useState<string[]>([]);
 
-  const available = restaurants.filter(({id}) => !rejects.some((rejectId) => id === rejectId));
+  const available = restaurants.filter(
+    ({ id }) => !rejects.some((rejectId) => id === rejectId)
+  );
 
   React.useEffect(() => {
     setCurr(available[Math.floor(Math.random() * available.length)]);
@@ -19,11 +22,16 @@ export const App: React.FC = () => {
     setCurr(rand);
   };
 
-  const suggestion = <><span>How about {curr?.name}</span>
-    <button onClick={handleReject}>No</button></>;
+  const suggestion = (
+    <>
+      <span>How about {curr?.name}</span>
+      <button onClick={handleReject}>No</button>
+    </>
+  );
 
   return (
     <div className="App">
+      <Header />
       {isLoading && 'Loading'}
       {!isLoading && suggestion}
     </div>

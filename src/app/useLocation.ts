@@ -1,5 +1,5 @@
-import {useGeolocation, useAsync} from 'react-use';
-import {getLatLong} from './api';
+import { useGeolocation, useAsync } from 'react-use';
+import { getLatLong } from './api';
 
 export interface LocationData {
   loading: boolean;
@@ -15,7 +15,7 @@ export const useLocation = (): LocationData => {
   const loading = sensorLocation.loading || clientIpLocation.loading;
   const lat = sensorLocation.latitude || clientIpLocation.value?.lat;
   const lon = sensorLocation.longitude || clientIpLocation.value?.lon;
-  const locationStr = (lat && lon) ? `${lat}, ${lon}` : null;
+  const locationStr = lat && lon ? `${lat}, ${lon}` : null;
 
-  return {lat, lon, loading, locationStr};
+  return { lat, lon, loading, locationStr };
 };

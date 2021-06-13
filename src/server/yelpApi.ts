@@ -32,7 +32,7 @@ export class YelpApi {
       openNow: true,
       limit: 50,
     };
-    const {jsonBody} = await this.client.search(req);
+    const { jsonBody } = await this.client.search(req);
     return jsonBody.businesses ?? [];
-  }
+  };
 }
