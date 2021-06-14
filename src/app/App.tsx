@@ -1,39 +1,59 @@
 import React from 'react';
+import { css } from '@emotion/css';
+
 import { Restaurant } from './api';
 import { useApiContext } from './ApiContext';
 import { Header } from './Header';
+import { OptionCard } from './OptionCard';
+
+const styles = {
+  main: css`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
+};
 
 export const App: React.FC = () => {
   const { restaurants, isLoading } = useApiContext();
   const [curr, setCurr] = React.useState<Restaurant>();
-  const [rejects, setRejects] = React.useState<string[]>([]);
-
-  const available = restaurants.filter(
-    ({ id }) => !rejects.some((rejectId) => id === rejectId)
-  );
+  const [availables, setAvailables] = React.useState<Restaurant[]>([]);
 
   React.useEffect(() => {
-    setCurr(available[Math.floor(Math.random() * available.length)]);
+    setAvailables(restaurants);
   }, [restaurants]);
 
+  React.useEffect(() => {
+    setCurr(availables[Math.floor(Math.random() * availables.length)]);
+  }, [availables]);
+
   const handleReject = () => {
-    curr && setRejects((rejects) => [curr.id, ...rejects]);
-    const rand = available[Math.floor(Math.random() * available.length)];
-    setCurr(rand);
+    const filtered = availables.filter(({ id }) => id !== curr?.id);
+    setAvailables(filtered);
   };
 
-  const suggestion = (
-    <>
-      <span>How about {curr?.name}</span>
-      <button onClick={handleReject}>No</button>
-    </>
-  );
+  const handleRejectCategory = (alias: string) => {
+    const filtered = availables.filter(
+      ({ categories }) => !categories.some((c) => c.alias === alias)
+    );
+    setAvailables(filtered);
+  };
 
   return (
     <div className="App">
       <Header />
-      {isLoading && 'Loading'}
-      {!isLoading && suggestion}
+      <div className={styles.main}>
+        {isLoading && 'Loading'}
+        {!isLoading && (
+          <OptionCard
+            restaurant={curr}
+            onRejectRestaurant={handleReject}
+            onRejectCategory={handleRejectCategory}
+          />
+        )}
+      </div>
     </div>
   );
 };

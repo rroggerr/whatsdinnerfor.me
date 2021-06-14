@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import {useDebounce} from 'react-use';
 import { css } from '@emotion/css';
 
 import { useApiContext } from './ApiContext';
@@ -31,15 +32,19 @@ const styles = {
     background-position-y: center;
     background-origin: padding-box;
     background-position-x: 8px;
-    font-size: 22px;
+    font-size: 20px;
   `,
 };
 
 export const Header: React.FC = () => {
-  const { displayLocation } = useApiContext();
+  const { displayLocation, refetchRestaurants } = useApiContext();
   const [locationStr, setLocationStr] = React.useState<string>('');
+  
+  useDebounce(() => {
+    refetchRestaurants(locationStr);
+  }, 1500, [locationStr]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setLocationStr(displayLocation ?? '');
   }, [displayLocation]);
 

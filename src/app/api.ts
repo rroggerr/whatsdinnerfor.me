@@ -1,3 +1,4 @@
+import camelcaseKeys from 'camelcase-keys';
 import { LocationData } from './useLocation';
 
 export const myFetch = async <T>(
@@ -30,9 +31,18 @@ interface GetRestaurantsRequest {
   isWalking: boolean;
 }
 
+export interface Category {
+  alias: string;
+  title: string;
+}
+
 export interface Restaurant {
   id: string;
   name: string;
+  imageUrl: string;
+  price: string;
+  location: { display_address: string[] };
+  categories: Category[];
 }
 
 export const getRestaurants = async (params: GetRestaurantsRequest) => {
@@ -45,5 +55,5 @@ export const getRestaurants = async (params: GetRestaurantsRequest) => {
     locationStr
   )}&walking=${walking}`;
   const res = await myFetch<Restaurant[]>('/api/restaurants' + queryParams, {});
-  return res;
+  return camelcaseKeys(res);
 };
