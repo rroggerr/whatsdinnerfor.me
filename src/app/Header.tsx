@@ -39,6 +39,9 @@ const styles = {
     background-origin: padding-box;
     background-position-x: 12px;
     font-size: 20px;
+    @media only screen and (max-width: 780px) {
+      width: 80%;
+    }
   `,
 };
 
