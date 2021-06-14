@@ -29,7 +29,7 @@ export const ApiContextProvider: React.FC = ({ children }) => {
     const locationStr = refetchString || location.locationStr || '';
     return getRestaurants({ location: locationStr, isWalking: true });
   };
-    
+
   const restaurants = useAsync(getRestaurantsCall, [
     location.loading,
     refetchString,
