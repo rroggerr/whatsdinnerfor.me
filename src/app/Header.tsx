@@ -34,10 +34,10 @@ const styles = {
     padding: 0 40px;
     background-image: url(location.svg);
     background-repeat: no-repeat;
-    background-size: 24px;
+    background-size: 20px;
     background-position-y: center;
     background-origin: padding-box;
-    background-position-x: 8px;
+    background-position-x: 12px;
     font-size: 20px;
   `,
 };

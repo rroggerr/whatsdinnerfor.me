@@ -14,6 +14,8 @@ const styles = {
     margin-top: 32px;
     @media only screen and (max-width: 780px) {
       width: 100%;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: unset;
     }
   `,
   image: css`
@@ -28,14 +30,18 @@ const styles = {
     padding: 0 16px;
     height: ${TITLE_HEIGHT}px;
   `,
+  optionContent: css`
+    display: grid;
+    grid-template-rows: 100px 1fr 260px;
+  `,
   restaurantNameText: css`
     font-size: 24px;
     font-weight: 600;
     font-family: Tahoma, sans-serif;
     display: inline-block;
+    word-break: break-word;
     &::before {
       content: "How about ";
-      white-space: pre;
     }
   `,
   restaurantInfo: css`
@@ -43,6 +49,7 @@ const styles = {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    padding: 0 24px;
     & > * {
       margin-top: 8px;
     }
@@ -56,6 +63,7 @@ const styles = {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
     & > button {
       margin-top: 16px;
     }
@@ -85,7 +93,7 @@ export const OptionCard: React.FC<OptionCardProps> = ({
   return (
     <div className={styles.root}>
       <img className={styles.image} src={restaurant.imageUrl} />
-      <div>
+      <div className={styles.optionContent}>
         <div className={styles.title}>
           <span className={styles.restaurantNameText}>{restaurant.name}</span>
         </div>
