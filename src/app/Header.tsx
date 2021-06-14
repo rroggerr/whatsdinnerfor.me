@@ -12,6 +12,12 @@ const styles = {
     padding: 0 64px;
     background-color: black;
     height: 72px;
+    @media only screen and (max-width: 780px) {
+      height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
   `,
   titleText: css`
     color: white;
@@ -39,14 +45,10 @@ const styles = {
 export const Header: React.FC = () => {
   const { displayLocation, refetchRestaurants } = useApiContext();
   const [locationStr, setLocationStr] = React.useState<string>('');
-  
+
   useDebounce(() => {
     refetchRestaurants(locationStr);
   }, 1500, [locationStr]);
-
-  React.useEffect(() => {
-    setLocationStr(displayLocation ?? '');
-  }, [displayLocation]);
 
   return (
     <div className={styles.root}>
@@ -58,6 +60,7 @@ export const Header: React.FC = () => {
         className={styles.input}
         maxLength={50}
         value={locationStr}
+        placeholder={displayLocation ?? ''}
         onChange={({ target }) => setLocationStr(target.value)}
       />
     </div>

@@ -12,6 +12,9 @@ const styles = {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-top: 32px;
+    @media only screen and (max-width: 780px) {
+      width: 100%;
+    }
   `,
   image: css`
     object-fit: cover;

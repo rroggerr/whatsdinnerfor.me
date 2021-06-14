@@ -27,7 +27,7 @@ export const getLatLong = async (): Promise<IpApiResp> => {
 };
 
 interface GetRestaurantsRequest {
-  location: LocationData;
+  location: string;
   isWalking: boolean;
 }
 
@@ -46,7 +46,7 @@ export interface Restaurant {
 }
 
 export const getRestaurants = async (params: GetRestaurantsRequest) => {
-  const { locationStr } = params.location;
+  const locationStr = params.location;
   if (!locationStr) return [];
 
   const walking = Boolean(params.isWalking).toString();

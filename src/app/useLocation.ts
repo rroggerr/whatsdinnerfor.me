@@ -7,6 +7,7 @@ export interface LocationData {
   displayLocation: null | string;
   lat?: string | number;
   lon?: string | number;
+  error?: Error;
 }
 
 export const useLocation = (): LocationData => {
@@ -20,6 +21,7 @@ export const useLocation = (): LocationData => {
   const displayLocation = sensorLocation?.latitude
     ? 'Current Location'
     : clientIpLocation.value?.city ?? null;
+  const error = clientIpLocation.error;
 
-  return { lat, lon, loading, locationStr, displayLocation };
+  return { error, lat, lon, loading, locationStr, displayLocation };
 };

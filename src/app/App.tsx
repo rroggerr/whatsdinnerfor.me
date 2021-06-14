@@ -17,7 +17,7 @@ const styles = {
 };
 
 export const App: React.FC = () => {
-  const { restaurants, isLoading } = useApiContext();
+  const { restaurants, isLoading, isError } = useApiContext();
   const [curr, setCurr] = React.useState<Restaurant>();
   const [availables, setAvailables] = React.useState<Restaurant[]>([]);
 
@@ -46,6 +46,7 @@ export const App: React.FC = () => {
       <Header />
       <div className={styles.main}>
         {isLoading && 'Loading'}
+        {isError && 'Hmm we couldn\'t find anything'}
         {!isLoading && (
           <OptionCard
             restaurant={curr}

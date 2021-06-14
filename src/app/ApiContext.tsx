@@ -5,6 +5,7 @@ import { useLocation } from './useLocation';
 
 interface ApiContextState {
   isLoading: boolean;
+  isError: boolean;
   location?: string | null;
   displayLocation?: string | null;
   restaurants: Restaurant[];
@@ -13,6 +14,7 @@ interface ApiContextState {
 
 const InitialState = {
   isLoading: false,
+  isError: false,
   restaurants: [],
   refetchRestaurants: () => 0,
 };
@@ -21,21 +23,25 @@ const ApiContext = React.createContext<ApiContextState>(InitialState);
 
 export const ApiContextProvider: React.FC = ({ children }) => {
   const location = useLocation();
-  const [refetchApi, setRefetchApi] = React.useState<string>('');
+  const [refetchString, setRefetchString] = React.useState<string>('');
 
-  const getRestaurantsCall = () =>
-    getRestaurants({ location, isWalking: true });
+  const getRestaurantsCall = () => {
+    const locationStr = refetchString || location.locationStr || '';
+    return getRestaurants({ location: locationStr, isWalking: true });
+  };
+    
   const restaurants = useAsync(getRestaurantsCall, [
     location.locationStr,
-    refetchApi,
+    refetchString,
   ]);
 
   const state: ApiContextState = {
     isLoading: location.loading || restaurants.loading,
+    isError: !!(location.error || restaurants.error),
     location: location.locationStr,
     displayLocation: location.displayLocation,
     restaurants: restaurants.value ?? [],
-    refetchRestaurants: (q: string) => setRefetchApi(q),
+    refetchRestaurants: (q: string) => setRefetchString(q),
   };
 
   return <ApiContext.Provider value={state}>{children}</ApiContext.Provider>;
