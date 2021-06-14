@@ -30,10 +30,7 @@ export const ApiContextProvider: React.FC = ({ children }) => {
     return getRestaurants({ location: locationStr, isWalking: true });
   };
     
-  const restaurants = useAsync(getRestaurantsCall, [
-    location.locationStr,
-    refetchString,
-  ]);
+  const restaurants = useAsync(getRestaurantsCall, [refetchString]);
 
   const state: ApiContextState = {
     isLoading: location.loading || restaurants.loading,
