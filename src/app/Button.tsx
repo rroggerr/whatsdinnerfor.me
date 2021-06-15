@@ -20,10 +20,6 @@ const getStyles = (color: 'black' | 'white') => ({
     &:hover {
       background: ${color === 'white' ? '#e3e3e3' : '#2e2e2e'};
     }
-
-    &:active {
-      background: ${color === 'white' ? '#bdbdbd' : '#4d4d4d'};
-    }
   `,
 });
 
