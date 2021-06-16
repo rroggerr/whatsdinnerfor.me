@@ -5,14 +5,16 @@ import { Button } from './Button';
 
 const TITLE_HEIGHT = 100;
 
-const styles = {
+export const styles = {
   root: css`
     width: 80%;
     height: 600px;
     display: grid;
+    grid-template-rows: unset;
     grid-template-columns: 1fr 1fr;
     margin-top: 32px;
     @media only screen and (max-width: 780px) {
+      margin-top: 0;
       width: 100%;
       grid-template-rows: 1fr 1fr;
       grid-template-columns: unset;
@@ -23,12 +25,18 @@ const styles = {
     height: 100%;
     width: 100%;
     overflow: hidden;
+    @media only screen and (max-width: 780px) {
+      height: 30vh !important;
+    }
   `,
   title: css`
     display: inline-block;
     align-items: center;
     padding: 0 16px;
     height: ${TITLE_HEIGHT}px;
+    @media only screen and (max-width: 780px) {
+      margin-top: 24px;
+    }
   `,
   optionContent: css`
     display: grid;
@@ -64,6 +72,7 @@ const styles = {
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+    padding: 0 24px;
     & > button {
       margin-top: 16px;
     }
@@ -89,6 +98,7 @@ export const OptionCard: React.FC<OptionCardProps> = ({
       {`I don't want ${cat.title} places`}
     </Button>
   );
+  const displayAddress = restaurant.location.display_address.join(' ');
 
   return (
     <div className={styles.root}>
@@ -98,9 +108,11 @@ export const OptionCard: React.FC<OptionCardProps> = ({
           <span className={styles.restaurantNameText}>{restaurant.name}</span>
         </div>
         <div className={styles.restaurantInfo}>
-          <span className={styles.secondaryText}>{restaurant.price}</span>
           <span className={styles.secondaryText}>
-            {restaurant.location.display_address.join(' ')}
+            {restaurant.price}&nbsp;
+          </span>
+          <span className={styles.secondaryText}>
+            {displayAddress}&nbsp;
           </span>
         </div>
         <div className={styles.buttonGroup}>

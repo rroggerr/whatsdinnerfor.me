@@ -35,9 +35,12 @@ export const ApiContextProvider: React.FC = ({ children }) => {
     refetchString,
   ]);
 
+  const isError = !!(location.error || restaurants.error);
+  const isLoading = location.loading || restaurants.loading;
+
   const state: ApiContextState = {
-    isLoading: location.loading || restaurants.loading,
-    isError: !!(location.error || restaurants.error),
+    isLoading: !isError && isLoading,
+    isError,
     location: location.locationStr,
     displayLocation: location.displayLocation,
     restaurants: restaurants.value ?? [],

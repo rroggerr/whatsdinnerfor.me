@@ -5,6 +5,7 @@ import { Restaurant } from './api';
 import { useApiContext } from './ApiContext';
 import { Header } from './Header';
 import { OptionCard } from './OptionCard';
+import { Loader } from './Loader';
 
 const styles = {
   main: css`
@@ -45,9 +46,10 @@ export const App: React.FC = () => {
     <div className="App">
       <Header />
       <div className={styles.main}>
-        {isLoading && 'Loading'}
-        {isError && 'Hmm we couldn\'t find anything'}
-        {!isLoading && (
+        {isError && 'X . X  Dieded'}
+        {isLoading ? (
+          <Loader />
+        ) : (
           <OptionCard
             restaurant={curr}
             onRejectRestaurant={handleReject}

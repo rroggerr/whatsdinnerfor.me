@@ -48,11 +48,13 @@ export class YelpApi {
       this._yelpGetPlaces(location, walking, 100),
       this._yelpGetPlaces(location, walking, 150),
     ]);
-    return [
+    const res = [
       ...businesses[0],
       ...businesses[1],
       ...businesses[2],
       ...businesses[3],
     ];
+    console.log(`Returning ${res.length} results for ${location} ${walking}`);
+    return res;
   };
 }

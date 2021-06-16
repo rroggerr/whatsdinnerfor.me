@@ -15,7 +15,7 @@ const getStyles = (color: 'black' | 'white') => ({
     display: flex;
     align-items: center;
     cursor: pointer;
-    width: 80%;
+    width: 100%;
 
     &:hover {
       background: ${color === 'white' ? '#e3e3e3' : '#2e2e2e'};
