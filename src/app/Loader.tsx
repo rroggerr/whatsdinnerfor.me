@@ -1,8 +1,8 @@
 import React from 'react';
 import ContentLoader, { Code } from 'react-content-loader';
-import { useMedia } from 'react-use'
+import { useMedia } from 'react-use';
 import { css, cx } from '@emotion/css';
-import { styles as optionCardStyles } from './OptionCard';;
+import { styles as optionCardStyles } from './OptionCard';
 
 const styles = {
   loaderStyles: css`

@@ -108,12 +108,8 @@ export const OptionCard: React.FC<OptionCardProps> = ({
           <span className={styles.restaurantNameText}>{restaurant.name}</span>
         </div>
         <div className={styles.restaurantInfo}>
-          <span className={styles.secondaryText}>
-            {restaurant.price}&nbsp;
-          </span>
-          <span className={styles.secondaryText}>
-            {displayAddress}&nbsp;
-          </span>
+          <span className={styles.secondaryText}>{restaurant.price}&nbsp;</span>
+          <span className={styles.secondaryText}>{displayAddress}&nbsp;</span>
         </div>
         <div className={styles.buttonGroup}>
           {categories.length > 0 && rejectCategoryBtn(categories[0])}
