@@ -7,6 +7,7 @@ export const myFetch = async <T>(
   const urlStart = process.env.VERCEL_URL ?? 'http://localhost:3000';
   const resp = await fetch(urlStart + url, params);
   const data = await resp.json();
+  throw new Error(urlStart + url);
   return data as T;
 };
 
