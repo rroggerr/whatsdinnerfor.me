@@ -12,24 +12,22 @@ export const myFetch = async <T>(
   return data as T;
 };
 
-interface IpApiResp {
-  lat: string;
-  lon: string;
+export interface IpApiResp {
+  lat: number;
+  lon: number;
   city: string;
+  zip: string;
 }
 
 export const getLatLong = async (): Promise<IpApiResp> => {
-  try {
-    const res = await myFetch<IpApiResp>('http://ip-api.com/json', {});
-    return res;
-  } catch {
-    const res = await myFetch<IpApiResp>('/api/location', {});
-    return res;
-  }
+  const res = await myFetch<IpApiResp>('/api/location', {});
+  return res;
 };
 
 interface GetRestaurantsRequest {
   location: string;
+  lat: number;
+  lon: number;
   isWalking: boolean;
 }
 
@@ -53,9 +51,13 @@ export const getRestaurants = async (params: GetRestaurantsRequest) => {
 
   const walking = Boolean(params.isWalking).toString();
 
-  const queryParams = `?location=${encodeURIComponent(
-    locationStr,
-  )}&walking=${walking}`;
+  const hasLatLon = params.lat && params.lon;
+
+  const queryParams = hasLatLon
+    ? `?latitude=${encodeURIComponent(
+      params.lat,
+    )}&longitude=${encodeURIComponent(params.lon)}&walking=${walking}`
+    : `?location=${encodeURIComponent(locationStr)}&walking=${walking}`;
   const res = await myFetch<Restaurant[]>('/api/restaurants' + queryParams, {});
   return camelcaseKeys(res);
 };
