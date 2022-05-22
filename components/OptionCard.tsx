@@ -1,6 +1,6 @@
 import React from 'react';
 import {css} from '@emotion/css';
-import {Category, Restaurant} from './apiHelpers';
+import {Business, Category} from '../types/business';
 import {Button} from './Button';
 
 const TITLE_HEIGHT = 100;
@@ -80,7 +80,7 @@ export const styles = {
 };
 
 interface OptionCardProps {
-  restaurant?: Restaurant;
+  restaurant?: Business;
   onRejectRestaurant: () => void;
   onRejectCategory: (alias: string) => void;
 }
@@ -98,7 +98,7 @@ export const OptionCard: React.FC<OptionCardProps> = ({
       {`I don't want ${cat.title} places`}
     </Button>
   );
-  const displayAddress = restaurant.location.display_address.join(' ');
+  const displayAddress = restaurant.location.displayAddress.join(' ');
 
   /* eslint-disable @next/next/no-img-element */
   return (

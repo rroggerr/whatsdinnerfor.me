@@ -1,4 +1,4 @@
-import camelcaseKeys from 'camelcase-keys';
+import {Business} from '../types/business';
 
 export const myFetch = async <T>(
   url: string,
@@ -19,45 +19,44 @@ export interface IpApiResp {
   zip: string;
 }
 
-export const getLatLong = async (): Promise<IpApiResp> => {
-  const res = await myFetch<IpApiResp>('/api/location', {});
-  return res;
+export const getLocation = async (ip: string): Promise<IpApiResp> => {
+  const resp = await fetch(`http://ip-api.com/json/${ip}`);
+  const location = await resp.json();
+  return location.status === 'success'
+    ? location
+    : {
+      lat: 40.694,
+      lon: -73.9901,
+      city: 'New York City',
+      zip: '10201',
+    };
 };
 
-interface GetRestaurantsRequest {
-  location: string;
-  lat: number;
-  lon: number;
-  isWalking: boolean;
-}
+export const getRestaurants = async (location: string, walking: boolean) => {
+  const encodedLocation = encodeURIComponent(location);
+  const encodedWalking = walking ? '&walking=true' : '';
+  const resp = await myFetch<Business[]>(
+    `/api/restaurants?location=${encodedLocation}${encodedWalking}`,
+    {},
+  );
+  return resp;
+};
 
-export interface Category {
-  alias: string;
-  title: string;
-}
+export const getCsrRestaurant = async (walking: boolean) => {
+  const loc = await getCsrLocation();
+  const encodedLoc = `${loc.coords.latitude}, ${loc.coords.longitude}`;
+  return getRestaurants(encodedLoc, walking);
+};
 
-export interface Restaurant {
-  id: string;
-  name: string;
-  imageUrl: string;
-  price: string;
-  location: {display_address: string[]};
-  categories: Category[];
-}
-
-export const getRestaurants = async (params: GetRestaurantsRequest) => {
-  const locationStr = params.location;
-  if (!locationStr) return [];
-
-  const walking = Boolean(params.isWalking).toString();
-
-  const hasLatLon = params.lat && params.lon;
-
-  const queryParams = hasLatLon
-    ? `?latitude=${encodeURIComponent(
-      params.lat,
-    )}&longitude=${encodeURIComponent(params.lon)}&walking=${walking}`
-    : `?location=${encodeURIComponent(locationStr)}&walking=${walking}`;
-  const res = await myFetch<Restaurant[]>('/api/restaurants' + queryParams, {});
-  return camelcaseKeys(res);
+const getCsrLocation = async () => {
+  return new Promise<GeolocationPosition>((res, rej) => {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        res(pos);
+      },
+      (err) => {
+        rej(err);
+      },
+    );
+  });
 };

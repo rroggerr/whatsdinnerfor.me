@@ -1,9 +1,12 @@
-import Head from 'next/head';
+import {GetServerSideProps} from 'next';
 import React, {useState, FC} from 'react';
 import {css} from '@emotion/css';
-import {Restaurant, getRestaurants, getLatLong} from '../components/apiHelpers';
+import {Business} from '../types/business';
+import {getLocation} from '../components/apiHelpers';
 import {Header} from '../components/Header';
+import {HtmlHead} from '../components/HtmlHead';
 import {OptionCard} from '../components/OptionCard';
+import {getRestaurants} from '../components/apiHelpers';
 
 const styles = {
   main: css`
@@ -15,29 +18,30 @@ const styles = {
   `,
 };
 
-export const getServerSideProps = async () => {
-  const location = await getLatLong();
-  const restaurants = await getRestaurants({
-    location: location.city ?? 'new york city',
-    lat: location.lat,
-    lon: location.lon,
-    isWalking: true,
-  });
+export const getServerSideProps: GetServerSideProps = async ({req}) => {
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  const location = await getLocation(ip as string);
+  const city = location.city ?? 'New York City';
+  const restaurants = await getRestaurants(city, true);
   const randIdx = Math.floor(Math.random() * restaurants.length);
   return {
-    props: {restaurants, city: location.city ?? 'New York City', randIdx},
+    props: {
+      restaurants,
+      city,
+      randIdx,
+    },
   };
 };
 
 type Props = {
-  restaurants: Restaurant[];
+  restaurants: Business[];
   randIdx: number;
   city: string;
 };
 
 const App: FC<Props> = ({restaurants, randIdx, city}) => {
-  const [curr, setCurr] = useState<Restaurant>(restaurants[randIdx]);
-  const [availables, setAvailables] = useState<Restaurant[]>(restaurants);
+  const [curr, setCurr] = useState<Business>(restaurants[randIdx]);
+  const [availables, setAvailables] = useState<Business[]>(restaurants);
 
   const handleReject = () => {
     const filtered = availables.filter(({id}) => id !== curr?.id);
@@ -55,23 +59,18 @@ const App: FC<Props> = ({restaurants, randIdx, city}) => {
 
   return (
     <div className="App">
-      <Head>
-        <title>Whats For Dinner</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="title" content="Whats For Dinner" />
-        <meta
-          name="description"
-          content="Find out what to eat for dinner near you"
-        />
-      </Head>
+      <HtmlHead />
       <Header displayLocation={city} />
       <div className={styles.main}>
-        <OptionCard
-          restaurant={curr}
-          onRejectRestaurant={handleReject}
-          onRejectCategory={handleRejectCategory}
-        />
+        {curr ? (
+          <OptionCard
+            restaurant={curr}
+            onRejectRestaurant={handleReject}
+            onRejectCategory={handleRejectCategory}
+          />
+        ) : (
+          <>Hmm looks like we ran out of places to show you</>
+        )}
       </div>
     </div>
   );
