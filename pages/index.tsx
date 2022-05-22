@@ -55,7 +55,10 @@ const App: FC<Props> = ({restaurants, randIdx}) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
         <meta name="title" content="Whats For Dinner" />
-        <meta name="description" content="Find out what to eat for dinner near you"></meta>
+        <meta
+          name="description"
+          content="Find out what to eat for dinner near you"
+        />
       </Head>
       <Header displayLocation="New York City" />
       <div className={styles.main}>
