@@ -1,11 +1,12 @@
 import camelcaseKeys from 'camelcase-keys';
-import { LocationData } from './useLocation';
 
 export const myFetch = async <T>(
   url: string,
-  params: Record<string, string>
+  params: Record<string, string>,
 ) => {
-  const resp = await fetch(url, params);
+  const urlStart =
+    process.env.NEXT_PUBLIC_VERCEL_URL ?? 'http://localhost:3000';
+  const resp = await fetch(urlStart + url, params);
   const data = await resp.json();
   return data as T;
 };
@@ -41,7 +42,7 @@ export interface Restaurant {
   name: string;
   imageUrl: string;
   price: string;
-  location: { display_address: string[] };
+  location: {display_address: string[]};
   categories: Category[];
 }
 
@@ -52,7 +53,7 @@ export const getRestaurants = async (params: GetRestaurantsRequest) => {
   const walking = Boolean(params.isWalking).toString();
 
   const queryParams = `?location=${encodeURIComponent(
-    locationStr
+    locationStr,
   )}&walking=${walking}`;
   const res = await myFetch<Restaurant[]>('/api/restaurants' + queryParams, {});
   return camelcaseKeys(res);

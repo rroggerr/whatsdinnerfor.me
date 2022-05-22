@@ -1,1 +1,1 @@
-declare module 'yelp-fusion'
+declare module "yelp-fusion";

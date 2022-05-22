@@ -1,11 +1,11 @@
-import yelp from 'yelp-fusion';
+import yelp from "yelp-fusion";
 
 interface Category {
   alias: string;
   title: string;
 }
 
-interface Business {
+export interface Business {
   id: string;
   categories: Category[];
   image_url: string;
@@ -27,7 +27,7 @@ export class YelpApi {
   ): Promise<Business[]> => {
     const radius = walking ? 1000 : 5000;
     const req = {
-      term: 'restaurants',
+      term: "restaurants",
       location,
       radius,
       openNow: true,
@@ -54,7 +54,6 @@ export class YelpApi {
       ...businesses[2],
       ...businesses[3],
     ];
-    console.log(`Returning ${res.length} results for ${location} ${walking}`);
     return res;
   };
 }

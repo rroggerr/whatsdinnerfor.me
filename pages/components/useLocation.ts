@@ -1,5 +1,5 @@
-import { useGeolocation, useAsync } from 'react-use';
-import { getLatLong } from './api';
+import {useGeolocation, useAsync} from 'react-use';
+import {getLatLong} from './apiHelpers';
 
 export interface LocationData {
   loading: boolean;
@@ -23,5 +23,5 @@ export const useLocation = (): LocationData => {
     : clientIpLocation.value?.city ?? null;
   const error = clientIpLocation.error;
 
-  return { error, lat, lon, loading, locationStr, displayLocation };
+  return {error, lat, lon, loading, locationStr, displayLocation};
 };

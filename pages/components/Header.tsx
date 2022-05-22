@@ -1,8 +1,5 @@
 import React from 'react';
-import { useDebounce } from 'react-use';
-import { css } from '@emotion/css';
-
-import { useApiContext } from './ApiContext';
+import {css} from '@emotion/css';
 
 const styles = {
   root: css`
@@ -45,17 +42,12 @@ const styles = {
   `,
 };
 
-export const Header: React.FC = () => {
-  const { displayLocation, refetchRestaurants } = useApiContext();
-  const [locationStr, setLocationStr] = React.useState<string>('');
+type Props = {
+  displayLocation: string;
+};
 
-  useDebounce(
-    () => {
-      refetchRestaurants(locationStr);
-    },
-    1500,
-    [locationStr]
-  );
+export const Header: React.FC<Props> = ({displayLocation}) => {
+  const [locationStr, setLocationStr] = React.useState<string>('');
 
   return (
     <div className={styles.root}>
@@ -68,7 +60,7 @@ export const Header: React.FC = () => {
         maxLength={50}
         value={locationStr}
         placeholder={displayLocation ?? ''}
-        onChange={({ target }) => setLocationStr(target.value)}
+        onChange={({target}) => setLocationStr(target.value)}
       />
     </div>
   );

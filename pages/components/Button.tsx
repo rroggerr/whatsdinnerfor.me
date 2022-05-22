@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '@emotion/css';
+import {css} from '@emotion/css';
 
 const getStyles = (color: 'black' | 'white') => ({
   root: css`

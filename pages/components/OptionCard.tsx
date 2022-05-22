@@ -1,7 +1,7 @@
 import React from 'react';
-import { css } from '@emotion/css';
-import { Category, Restaurant } from './api';
-import { Button } from './Button';
+import {css} from '@emotion/css';
+import {Category, Restaurant} from './apiHelpers';
+import {Button} from './Button';
 
 const TITLE_HEIGHT = 100;
 
@@ -49,7 +49,7 @@ export const styles = {
     display: inline-block;
     word-break: break-word;
     &::before {
-      content: "How about ";
+      content: 'How about ';
     }
   `,
   restaurantInfo: css`
@@ -100,9 +100,14 @@ export const OptionCard: React.FC<OptionCardProps> = ({
   );
   const displayAddress = restaurant.location.display_address.join(' ');
 
+  /* eslint-disable @next/next/no-img-element */
   return (
     <div className={styles.root}>
-      <img className={styles.image} src={restaurant.imageUrl} />
+      <img
+        className={styles.image}
+        src={restaurant.imageUrl}
+        alt={restaurant.name}
+      />
       <div className={styles.optionContent}>
         <div className={styles.title}>
           <span className={styles.restaurantNameText}>{restaurant.name}</span>
