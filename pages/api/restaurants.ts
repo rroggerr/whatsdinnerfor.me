@@ -6,7 +6,7 @@ const YelpClient = new YelpApi(yelpApiKey);
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Business[]>,
+  res: NextApiResponse<Business[] | Error>,
 ) {
   try {
     const {location, walking} = req.query;
@@ -17,7 +17,7 @@ export default async function handler(
     res.json(yelpResp);
   } catch (err: unknown) {
     if (err instanceof Error) {
-      res.status(500).json([]);
+      res.status(500).json(err);
     }
   }
 }

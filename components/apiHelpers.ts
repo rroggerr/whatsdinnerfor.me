@@ -4,8 +4,9 @@ export const myFetch = async <T>(
   url: string,
   params: Record<string, string>,
 ) => {
-  const urlStart = process.env.VERCEL_URL ?? 'http://localhost:3000';
-  throw new Error(urlStart + url);
+  const urlStart = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000';
   const resp = await fetch(urlStart + url, params);
   const data = await resp.json();
   return data as T;
