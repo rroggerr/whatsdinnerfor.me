@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import React, {useState, FC} from 'react';
 import {css} from '@emotion/css';
-import {Restaurant, getRestaurants, getLatLong} from './components/apiHelpers';
-import {Header} from './components/Header';
-import {OptionCard} from './components/OptionCard';
+import {Restaurant, getRestaurants, getLatLong} from '../components/apiHelpers';
+import {Header} from '../components/Header';
+import {OptionCard} from '../components/OptionCard';
 
 const styles = {
   main: css`
